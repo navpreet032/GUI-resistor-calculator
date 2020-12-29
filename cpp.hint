@@ -1,0 +1,7 @@
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define wxEVT_COMMAND_COMBOBOX_SELECTED
+#define wxT(x)
+#define wxT(x) wxCONCAT_HELPER(L, x)
+#define wxT(x) wxPREPEND_L(x)
