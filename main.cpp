@@ -236,7 +236,7 @@ void MyFrame::onDropDown1(wxCommandEvent& event) {// FOR COMBOBOX 1
         num12 = stoi(conctS);
         ans = num12 * multiplier;
     }}
-     {if (strcmp(selected_textCbox1, "ORAGNE") == 0) {
+     {if (strcmp(selected_textCbox1, "ORANGE") == 0) {
         num1 = 3;
 
         s1 = to_string(num1);
@@ -515,27 +515,27 @@ void MyFrame::onDropDown4(wxCommandEvent& event) {// FOR COMBOBOX 4
 
     selected_textCbox4= combo4->GetValue();
     { if (strcmp(selected_textCbox3, "BROWN") == 0) {
-        textCtrlTol->AppendText("+-1%");
+        textCtrlTol->AppendText("±1%");
     }}
     { if (strcmp(selected_textCbox4, "RED") == 0) {
-        textCtrlTol->AppendText("+-2%");
+        textCtrlTol->AppendText("±2%");
     }}
     { if (strcmp(selected_textCbox4, "GREEN") == 0) {
-        textCtrlTol->AppendText("+-0.5%");
+        textCtrlTol->AppendText("±0.5%");
     }}
     { if (strcmp(selected_textCbox4, "BLUE") == 0) {
-        textCtrlTol->AppendText("+-0.25%");
+        textCtrlTol->AppendText("±0.25%");
     }}
     { if (strcmp(selected_textCbox4, "VOILET") == 0) {
-        textCtrlTol->AppendText("+-0.1%");
+        textCtrlTol->AppendText("±0.1%");
     }}
     { if (strcmp(selected_textCbox4, "GREY") == 0) {
-        textCtrlTol->AppendText("+-0.05%");
+        textCtrlTol->AppendText("±0.05%");
     }}
     { if (strcmp(selected_textCbox4, "WHITE") == 0) {
-        textCtrlTol->AppendText("+-5%");
+        textCtrlTol->AppendText("±5%");
     }} { if (strcmp(selected_textCbox4, "GOLD") == 0) {
-        textCtrlTol->AppendText("+-10%");
+        textCtrlTol->AppendText("±10%");
     }}
     event.Skip();
 }
