@@ -1,16 +1,20 @@
 #include<string>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
+#include <wx/propgrid/propgrid.h>
 #include <wx/wxprec.h>
 #include <wx/config.h>
 #include <wx/radiobut.h>
+#include <wx/valnum.h>
 #include<wx/textctrl.h>
 #include <wx/radiobox.h>
 #include "wx/button.h"
 #include"wx/statbox.h"
 #include <wx/checklst.h>
 #include<wx/combobox.h>
-//#include"Nav.h"
+#include"units.h"
 
 #include<wx/string.h>
 
@@ -28,9 +32,9 @@ class MyFrame : public wxFrame
 public:
     MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
 public:
-    wxTextCtrl* textCtrl1 = new wxTextCtrl(this, 15, "", wxPoint(305, 200), wxSize(80, 25));      //}            text boX
+    wxTextCtrl* textCtrl1 = new wxTextCtrl(this, 15, "", wxPoint(305, 200), wxSize(80, 25) );      //}            text boX
     wxTextCtrl* textCtrlTol = new wxTextCtrl(this, 14, "", wxPoint(385, 200), wxSize(45, 25));      //}            text boX for tolarence
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CALCULATOR CODE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CALCULATOR CODE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   long long int num1, num2;
    
     float multiplier;
@@ -39,9 +43,11 @@ public:
     string conctS;
     string ANS;
     int num12 ;
-    int ans ; 
+    float ans,fpoint ; 
+    float U;
   
 public:
+    
     ////////////////////  COMBOBOX
     wxComboBox* combo1;//
     wxComboBox* combo2;//
@@ -60,6 +66,7 @@ private:
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void onButtonCal(wxCommandEvent& event);
+    void onRadioButt4(wxCommandEvent& event);
     void onDropDown1(wxCommandEvent& event);
     void onDropDown2(wxCommandEvent& event);
     void onDropDown3(wxCommandEvent& event);
@@ -85,6 +92,7 @@ EVT_MENU(ID_Hello, MyFrame::OnHello)
 EVT_MENU(wxID_EXIT, MyFrame::OnExit)
 EVT_MENU(wxID_ABOUT, MyFrame::OnAbout)
 EVT_BUTTON(032, onButtonCal)
+EVT_RADIOBUTTON(ID_RADIOBUTTON1,onRadioButt4)
 EVT_COMBOBOX(033, onDropDown1)
 EVT_COMBOBOX(034, onDropDown2)
 EVT_COMBOBOX(035, onDropDown3)
@@ -203,342 +211,347 @@ void MyFrame::OnHello(wxCommandEvent& event)
 {
     wxLogMessage("Hello world from wxWidgets!");
 }
-
-void MyFrame::onDropDown1(wxCommandEvent& event) {// FOR COMBOBOX 1
-    
-    selected_textCbox1 = combo1->GetValue();
-    
-    {if (strcmp(selected_textCbox1, "BLACK") == 0) {
-        num1 = 0;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }}
-    
-     {if (strcmp(selected_textCbox1, "BROWN") == 0) {
-        num1 = 1;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }} 
-     {if (strcmp(selected_textCbox1, "RED") == 0) {
-        num1 = 2;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }}
-     {if (strcmp(selected_textCbox1, "ORANGE") == 0) {
-        num1 = 3;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }}
-    {if (strcmp(selected_textCbox1, "YELLOW") == 0) {
-        num1 = 4;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }} 
-    {if (strcmp(selected_textCbox1, "GREEN") == 0) {
-        num1 = 5;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }} 
-    {if (strcmp(selected_textCbox1, "BLUE") == 0) {
-        num1 = 6;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }} 
-    {if (strcmp(selected_textCbox1, "VIOLET") == 0) {
-        num1 = 7;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }} 
-    {if (strcmp(selected_textCbox1, "GREY") == 0) {
-        num1 = 8;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }} 
-    {if (strcmp(selected_textCbox1, "WHITE") == 0) {
-        num1 = 9;
-
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-    }}
-  
-    event.Skip();
+void MyFrame::onRadioButt4(wxCommandEvent& event) {
+   // band4 = true;
 }
-void MyFrame::onDropDown2(wxCommandEvent& event) {// FOR COMBOBOX 2
 
-    selected_textCbox2 = combo2->GetValue();
-    {   if (strcmp(selected_textCbox2, "BLACK") == 0) {
-        num2 = 0;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-       
-    }}
+    void MyFrame::onDropDown1(wxCommandEvent & event) {// FOR COMBOBOX 1
 
-    {   if (strcmp(selected_textCbox2, "BROWN") == 0) {
-        num2 = 1;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-       
-    }}
+        selected_textCbox1 = combo1->GetValue();
 
-    {   if (strcmp(selected_textCbox2, "RED") == 0) {
-        num2 = 2;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        
-    }}
+        if (strcmp(selected_textCbox1, "BLACK") == 0) {
+            num1 = 0;
 
-    {   if (strcmp(selected_textCbox2, "ORANGE") == 0) {
-        num2 = 3;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-       
-    }}
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
 
-    {   if (strcmp(selected_textCbox2, "YELLOW") == 0) {
-        num2 = 4;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        
-    }}
+        if (strcmp(selected_textCbox1, "BROWN") == 0) {
+            num1 = 1;
 
-    {   if (strcmp(selected_textCbox2, "GREEN") == 0) {
-        num2 = 5;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "RED") == 0) {
+            num1 = 2;
 
-    }}
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "ORAGNE") == 0) {
+            num1 = 3;
 
-    {   if (strcmp(selected_textCbox2, "BLUE") == 0) {
-        num2 = 6;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        
-    }}
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "YELLOW") == 0) {
+            num1 = 4;
 
-    {   if (strcmp(selected_textCbox2, "VOILET") == 0) {
-        num2 = 7;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        
-    }}
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "GREEN") == 0) {
+            num1 = 5;
 
-    {   if (strcmp(selected_textCbox2, "GREY") == 0) {
-        num2 = 8;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        
-    }}
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "BLUE") == 0) {
+            num1 = 6;
 
-    {   if (strcmp(selected_textCbox2, "WHITE") == 0) {
-        num2 = 9;
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-       
-    }}
-    event.Skip();
-}
-void MyFrame::onDropDown3(wxCommandEvent& event) {// FOR COMBOBOX 3
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "VIOLET") == 0) {
+            num1 = 7;
 
-    selected_textCbox3 = combo3->GetValue();
-    { if (strcmp(selected_textCbox3, "BLACK") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 1;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "GREY") == 0) {
+            num1 = 8;
 
-    }}
-    { if (strcmp(selected_textCbox3, "BROWN") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 10;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
+        if (strcmp(selected_textCbox1, "WHITE") == 0) {
+            num1 = 9;
 
-    }}
-    { if (strcmp(selected_textCbox3, "RED") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 100;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+        }
 
-    }}
-    { if (strcmp(selected_textCbox3, "ORANGE") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 1000;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+        event.Skip();
+    }
 
-    }}
-    { if (strcmp(selected_textCbox3, "YELLOW") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 10000;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
 
-    }}
-    { if (strcmp(selected_textCbox3, "GREEN") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 100000;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+    void MyFrame::onDropDown2(wxCommandEvent & event) {// FOR COMBOBOX 2
 
-    }}
-    { if (strcmp(selected_textCbox3, "BLUE") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 1000000;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+        selected_textCbox2 = combo2->GetValue();
+           if (strcmp(selected_textCbox2, "BLACK") == 0) {
+            num2 = 0;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
 
-    }}
-    { if (strcmp(selected_textCbox3, "VOILET") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 10000000;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+        }
 
-    }}
-    { if (strcmp(selected_textCbox3, "GREY") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 100000000;
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+           if (strcmp(selected_textCbox2, "BROWN") == 0) {
+            num2 = 1;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
 
-    }}
-    { if (strcmp(selected_textCbox3, "WHITE") == 0) {
-        s1 = to_string(num1);
-        s2 = to_string(num2);
-        conctS = s1 + s2;
-        multiplier = 1000000000;// bug
-        num12 = stoi(conctS);
-        ans = num12 * multiplier;
-        ANS = to_string(ans);
+        }
 
-    }}
-    event.Skip();
-}
-void MyFrame::onDropDown4(wxCommandEvent& event) {// FOR COMBOBOX 4
+           if (strcmp(selected_textCbox2, "RED") == 0) {
+            num2 = 2;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
 
-    selected_textCbox4= combo4->GetValue();
-    { if (strcmp(selected_textCbox3, "BROWN") == 0) {
-        textCtrlTol->AppendText("±1%");
-    }}
-    { if (strcmp(selected_textCbox4, "RED") == 0) {
-        textCtrlTol->AppendText("±2%");
-    }}
-    { if (strcmp(selected_textCbox4, "GREEN") == 0) {
-        textCtrlTol->AppendText("±0.5%");
-    }}
-    { if (strcmp(selected_textCbox4, "BLUE") == 0) {
-        textCtrlTol->AppendText("±0.25%");
-    }}
-    { if (strcmp(selected_textCbox4, "VOILET") == 0) {
-        textCtrlTol->AppendText("±0.1%");
-    }}
-    { if (strcmp(selected_textCbox4, "GREY") == 0) {
-        textCtrlTol->AppendText("±0.05%");
-    }}
-    { if (strcmp(selected_textCbox4, "WHITE") == 0) {
-        textCtrlTol->AppendText("±5%");
-    }} { if (strcmp(selected_textCbox4, "GOLD") == 0) {
-        textCtrlTol->AppendText("±10%");
-    }}
-    event.Skip();
-}
-void MyFrame::onButtonCal(wxCommandEvent& event) {
-    textCtrl1->AppendText(ANS);
-} //selected_textCbox2 = combo2->GetValue();
+        }
+
+           if (strcmp(selected_textCbox2, "ORANGE") == 0) {
+            num2 = 3;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+        }
+
+           if (strcmp(selected_textCbox2, "YELLOW") == 0) {
+            num2 = 4;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+       }
+
+           if (strcmp(selected_textCbox2, "GREEN") == 0) {
+            num2 = 5;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+        }
+
+           if (strcmp(selected_textCbox2, "BLUE") == 0) {
+            num2 = 6;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+        }
+
+         if (strcmp(selected_textCbox2, "VOILET") == 0) {
+            num2 = 7;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+       }
+
+           if (strcmp(selected_textCbox2, "GREY") == 0) {
+            num2 = 8;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+        }
+
+           if (strcmp(selected_textCbox2, "WHITE") == 0) {
+            num2 = 9;
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+
+        }
+        event.Skip();
+    }
+    void MyFrame::onDropDown3(wxCommandEvent& event) {// FOR COMBOBOX 3
+
+        selected_textCbox3 = combo3->GetValue();
+        if (strcmp(selected_textCbox3, "BLACK") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 1;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+           
+        }
+        if (strcmp(selected_textCbox3, "BROWN") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 10;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+        if (strcmp(selected_textCbox3, "RED") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 100;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS= unit(ans);
+        }
+        if (strcmp(selected_textCbox3, "ORANGE") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 1000;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);;
+
+        }
+        if (strcmp(selected_textCbox3, "YELLOW") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 10000;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+        if (strcmp(selected_textCbox3, "GREEN") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 100000;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+        if (strcmp(selected_textCbox3, "BLUE") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 1000000;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+        if (strcmp(selected_textCbox3, "VOILET") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 10000000;
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+        if (strcmp(selected_textCbox3, "GREY") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 100000000;// ****Bug**** program crashes here some time
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+        if (strcmp(selected_textCbox3, "WHITE") == 0) {
+            s1 = to_string(num1);
+            s2 = to_string(num2);
+            conctS = s1 + s2;
+            multiplier = 1,000,000,000;//  ***Bug*** alwaya crashes here
+            num12 = stoi(conctS);
+            ans = num12 * multiplier;
+            ANS = unit(ans);
+
+        }
+
+        event.Skip();
+    }
+    void MyFrame::onDropDown4(wxCommandEvent & event) {// FOR COMBOBOX 4
+
+        selected_textCbox4 = combo4->GetValue();
+         if (strcmp(selected_textCbox3, "BROWN") == 0) {
+            textCtrlTol->AppendText("+-1%");
+        }
+         if (strcmp(selected_textCbox4, "RED") == 0) {
+            textCtrlTol->AppendText("+-2%");
+        }
+         if (strcmp(selected_textCbox4, "GREEN") == 0) {
+            textCtrlTol->AppendText("+-0.5%");
+        }
+         if (strcmp(selected_textCbox4, "BLUE") == 0) {
+            textCtrlTol->AppendText("+-0.25%");
+        }
+         if (strcmp(selected_textCbox4, "VOILET") == 0) {
+            textCtrlTol->AppendText("+-0.1%");
+        }
+         if (strcmp(selected_textCbox4, "GREY") == 0) {
+            textCtrlTol->AppendText("+-0.05%");
+        }
+         if (strcmp(selected_textCbox4, "WHITE") == 0) {
+            textCtrlTol->AppendText("+-5%");
+        }  if (strcmp(selected_textCbox4, "GOLD") == 0) {
+            textCtrlTol->AppendText("+-10%");
+        }
+        event.Skip();
+    }
+    void MyFrame::onButtonCal(wxCommandEvent & event) {
+        textCtrl1->AppendText(ANS);
+    } //selected_textCbox2 = combo2->GetValue();
