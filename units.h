@@ -43,7 +43,7 @@ string unit(unsigned long long x) {
 		}
 
 	}
-	if (countK <= 10) {
+	if (countK <= 1000) {
 		ans = temp / 1000000000;
 		stream << fixed << setprecision(1) << ans;
 		s = stream.str(); return s + "G ohm";
